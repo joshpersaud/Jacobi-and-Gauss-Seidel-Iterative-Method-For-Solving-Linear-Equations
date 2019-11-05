@@ -1,13 +1,21 @@
 function [R, E, I] = jacobi(System, x, Tolerance, Flag)
-[N, m] = size(System); A = System(:, 1:m - 1); b = System(:, m);
+
+% Parse input/outpt
+[N, m] = size(System); 
+A = System(:, 1:m - 1); 
+b = System(:, m);
+
+% Re-order system if not diagonally dominant
 for i = 1: N
     b(i) = b(i) / A(i, i);
     for j = 1: N
     	if i ~= j
     		A(i, j) = A(i, j) / A(i, i);
     	end 
-	end
+    end
 end
+
+% Check flags
 if Flag < 1 || Flag > 2 
 	disp('Input Flags: ');
 else
