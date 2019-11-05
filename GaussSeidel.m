@@ -1,12 +1,12 @@
-
-	
 function GaussR(A, start, tol, crit)
 
+% Parse input/outpt
 n = size(A, 1);
 b = A(:, end); % separate vector from coeff
 A(:, end) = [];
 count = 0;
 
+% Re-order system if not diagonally dominant
 for i = 1:n
     b(i) = b(i) / A(i, i);
     x(i) = start(i);
